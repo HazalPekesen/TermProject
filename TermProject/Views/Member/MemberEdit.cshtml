@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewData["Title"] = "MemberEdit";
+    Layout = "~/Views/Shared/User_Layout.cshtml";
+}
+
+@model EntityLayer.ViewModels.UserEditViewModel
+
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<div asp-validation-summary=ModelOnly class="alert alert-danger" role="alert">
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="title">Edit Profile</h5>
+            </div>
+            <div class="card-body">
+                <form asp-controller="Member" asp-action="MemberEdit" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-5 pr-md-1">
+                            <div class="form-group">
+                                <label>UserName (disabled)</label>
+                                <input type="text" class="form-control" placeholder="@Model.UserName" asp-for="UserName" readonly>
+                                <span asp-validation-for="UserName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-5 pl-md-1">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" class="form-control" placeholder="@Model.Email" asp-for="Email"> <!-- Buradaki asp-for değeri Email olarak güncellendi -->
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 pr-md-1">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" class="form-control" placeholder="@Model.City" asp-for="City">
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-md-1">
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <select asp-for="Gender" asp-items="ViewBag.genderList" class="form-control">
+                                    <option value="">Cinsiyet seçiniz</option>
+                                </select>
+                                <span asp-validation-for="Gender" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pl-md-1">
+                            <div class="form-group">
+                                <label>Birthday</label>
+                                <input asp-for="BirthDate" class="form-control">
+                                <span asp-validation-for="BirthDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label>About Me</label>
+                                <textarea rows="4" cols="80" class="form-control" placeholder="Here can be your description" value="Mike"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label asp-for="Picture">Resim Seç</label>
+                                <div class="col-sm-8">
+                                    <input type="file" asp-for="Picture" class="form-control" style="opacity: 139% !important;position: relative !important;">
+                                    <span asp-validation-for="Picture" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-fill btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

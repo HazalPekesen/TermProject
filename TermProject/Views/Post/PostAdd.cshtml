@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "PostAdd";
+    Layout = "~/Views/Shared/User_Layout.cshtml";
+}
+
+@model EntityLayer.Model.Post
+
+@using (Html.BeginForm("PostAdd", "Post", FormMethod.Post))
+{
+<div class="text-center">
+    <h1 class="display-4">Welcome Moodify!</h1>
+    <p>Whats happening? Post it!</p>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <textarea name="Text" asp-for="@Model.Text" rows="4" cols="80" class="form-control" placeholder="Post what you feel!" value=""></textarea>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-fill btn-primary">Post!</button>
+</div>
+}
+
+<br />
+<br />
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        @TempData["SuccessMessage"]
+        <br>
+        @TempData["EmotionResult"]
+    </div>
+}
